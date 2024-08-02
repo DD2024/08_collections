@@ -1,11 +1,14 @@
 import org.example.NoteService
 import org.junit.Test
-
 import org.junit.Assert.*
+import org.junit.Before
 
 class NoteServiceTest {
 
-
+    @Before
+    fun clearBeforeTest() {
+        NoteService.clear()
+    }
 
     @Test (expected = Exception::class)
     fun createCommentFail1() {

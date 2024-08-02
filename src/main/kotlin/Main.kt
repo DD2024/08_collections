@@ -23,6 +23,11 @@ object NoteService{
     private var notes = mutableListOf<Note>()
     private var comments = mutableListOf<Comment>()
 
+    fun clear() {
+        notes = mutableListOf()
+        comments = mutableListOf()
+    }
+
     fun add(note_id: Int, title: String, text: String): Int{
 
         val note = Note(note_id, title, text)
