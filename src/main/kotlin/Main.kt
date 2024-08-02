@@ -12,8 +12,8 @@ fun main() {
     noteService.edit(2, "not_2", "text of the note_2")
     noteService.delete(2)
 
-    noteService.deleteComment(2)
-    noteService.restoreComment(2, )
+    noteService.deleteComment(1)
+    noteService.restoreComment(1)
 
     noteService.editComment(1, "new message of the comment 1")
 }
@@ -64,6 +64,7 @@ object NoteService{
         for(item in comments){
            if(item.noteId == noteId){
                comments.remove(item)
+               break
            }
         }
         return 1
