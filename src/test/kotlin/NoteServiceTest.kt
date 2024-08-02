@@ -64,6 +64,7 @@ class NoteServiceTest {
         service.add(1, "note1", "text of the note 1")
         service.createComment(1, 1, "message of the comment 1")
         service.deleteComment(1)
+        service.deleteComment(1)
 
     }
 
