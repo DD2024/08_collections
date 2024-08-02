@@ -28,54 +28,54 @@ object NoteService{
         comments = mutableListOf()
     }
 
-    fun add(note_id: Int, title: String, text: String): Int{
+    fun add(noteId: Int, title: String, text: String): Int{
 
-        val note = Note(note_id, title, text)
+        val note = Note(noteId, title, text)
 
         notes += note
 
-        return notes.last().note_id
+        return notes.last().noteId
     }
 
-    fun createComment(comment_id: Int, note_id: Int, message: String): Int{
+    fun createComment(commentId: Int, noteId: Int, message: String): Int{
 
-        getById(note_id)?: throw Exception("no note with note_id $note_id")
+        getById(noteId)?: throw Exception("no note with noteId $noteId")
         comments = getComments()
         for(item in comments){
-            if(item.comment_id == comment_id){
-                throw Exception("comment with comment_id $comment_id already exists")
+            if(item.commentId == commentId){
+                throw Exception("comment with commentId $commentId already exists")
             }
         }
 
-        val comment = Comment(comment_id, note_id, message)
+        val comment = Comment(commentId, noteId, message)
 
         comments += comment
 
-        return comments.last().comment_id
+        return comments.last().commentId
     }
 
-    fun delete(note_id: Int): Int{
+    fun delete(noteId: Int): Int{
 
-        val note = getById(note_id)?: throw Exception("no note with note_id $note_id")
+        val note = getById(noteId)?: throw Exception("no note with noteId $noteId")
         val notes = get()
         notes.remove(note)
 
         val comments = getComments()
         for(item in comments){
-           if(item.note_id == note_id){
+           if(item.noteId == noteId){
                comments.remove(item)
            }
         }
         return 1
     }
 
-    fun deleteComment(comment_id: Int): Int{
+    fun deleteComment(commentId: Int): Int{
 
         val comments = getComments()
         for(item in comments){
-            if(item.comment_id == comment_id){
+            if(item.commentId == commentId){
                 if(item.deleted){
-                    throw Exception("comment with comment_id $comment_id already deleted")
+                    throw Exception("comment with commentId $commentId already deleted")
                 } else {
                 item.deleted = true
                 return 1
@@ -83,12 +83,12 @@ object NoteService{
             }
         }
 
-        throw Exception("no comment with comment_id $comment_id")
+        throw Exception("no comment with commentId $commentId")
     }
 
-    fun edit(note_id: Int, title: String, text: String): Int{
+    fun edit(noteId: Int, title: String, text: String): Int{
 
-        val note = getById(note_id)?: throw Exception("no note with note_id $note_id")
+        val note = getById(noteId)?: throw Exception("no note with noteId $noteId")
         note.text = text
         note.title = title
 
@@ -96,20 +96,20 @@ object NoteService{
 
     }
 
-    fun editComment(comment_id: Int, message: String): Int{
+    fun editComment(commentId: Int, message: String): Int{
 
         val comments = getComments()
         for(item in comments){
-            if(item.comment_id == comment_id){
+            if(item.commentId == commentId){
                 if(item.deleted){
-                    throw Exception("comment with comment_id $comment_id already deleted")
+                    throw Exception("comment with commentId $commentId already deleted")
                 } else {
                     item.message = message
                     return 1
                 }
             }
         }
-        throw Exception("no comment with comment_id $comment_id")
+        throw Exception("no comment with commentId $commentId")
     }
 
 
@@ -117,10 +117,10 @@ object NoteService{
         return notes
     }
 
-    fun getById(note_id: Int): Note?{
+    fun getById(noteId: Int): Note?{
 
         for(item in notes){
-            if(item.note_id == note_id){
+            if(item.noteId == noteId){
                 return item
             }
         }
@@ -132,20 +132,20 @@ object NoteService{
         return comments
     }
 
-    fun restoreComment(comment_id: Int): Int{
+    fun restoreComment(commentId: Int): Int{
 
         val comments = getComments()
         for(item in comments){
-            if(item.comment_id == comment_id){
+            if(item.commentId == commentId){
                 if(!item.deleted){
-                    throw Exception("comment with comment_id $comment_id deleted")
+                    throw Exception("comment with commentId $commentId deleted")
                 } else {
                     item.deleted = false
                     return 1
                 }
             }
         }
-        throw Exception("no comment with comment_id $comment_id")
+        throw Exception("no comment with commentId $commentId")
 
     }
 }

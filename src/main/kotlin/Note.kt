@@ -1,7 +1,7 @@
 package org.example
 
 data class Note(
-    val note_id: Int,
+    val noteId: Int,
     var title: String,
     var text: String
 )
